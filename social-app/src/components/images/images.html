@@ -1,0 +1,22 @@
+
+<div *ngIf = "Images" class="group">
+  <ion-grid>
+    <ion-row>
+      <ion-col col-6 col-md-4 col-lg-3 col-xl-2 class="created_group" *ngFor="let image of userImages">
+        <div class="container">
+          <div class="imgs">
+            <img src="https://res.cloudinary.com/anheart/image/upload/v{{
+            image.imgVersion
+          }}/{{ image.imgId }}" class="imgBg">
+          
+          
+        </div>
+      </div>
+      <button *ngIf = "hasImages" (click) = "setAsDefault(image)"ion-button clear>
+        Set as Default
+      </button>
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
+</div>

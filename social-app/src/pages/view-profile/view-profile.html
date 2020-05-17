@@ -1,0 +1,66 @@
+<ion-header no-border class="toolbar_header">
+  <ion-navbar transparent>
+
+
+    <p class="titleBtn">{{user.username}}</p>
+
+    <ion-buttons end>
+      <button ion-button icon-only (click)="chatPage(user)">
+        <ion-icon name="chatboxes"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="openPopOver($event,user)">
+        <ion-icon name="more" class="menuIcon"></ion-icon>
+      </button>
+    </ion-buttons>
+
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="userPosts">
+  <div class="header-image" [style.background-image]="headerImage"></div>
+  <div class="main-content" text-wrap text-center>
+    <div class="circularBtn">
+      <img src="https://res.cloudinary.com/anheart/image/upload/v{{
+        user.picVersion
+      }}/{{ user.picId }}">
+    </div>
+    <h2>{{user.username}}</h2>
+    <!-- <p>City
+      <span>&bull;</span> Country</p> -->
+  </div>
+  <div [(ngModel)]="userprofile">
+    <ion-segment color="primary" (ionChange)="segmentChanged($event)">
+      <ion-segment-button value="posts">
+        Posts
+      </ion-segment-button>
+      <ion-segment-button value="following">
+        Following
+      </ion-segment-button>
+      <ion-segment-button value="followers">
+        Followers
+      </ion-segment-button>
+      <ion-segment-button value="images">
+        Images
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+
+  <div class="userPosts" [ngSwitch]="userprofile">
+    <ion-list *ngSwitchCase="'posts'">
+      <app-posts [user]="user"></app-posts>
+    </ion-list>
+    <ion-list *ngSwitchCase="'following'">
+      <app-user-friends [friends]="userFriends"></app-user-friends>
+    </ion-list>
+    <ion-list *ngSwitchCase="'followers'">
+      <app-user-friends [friends]="userFriends"></app-user-friends>
+    </ion-list>
+    <ion-list *ngSwitchCase="'images'">
+      <app-images [Images] = "user"></app-images>
+    </ion-list>
+  </div>
+
+
+</ion-content>

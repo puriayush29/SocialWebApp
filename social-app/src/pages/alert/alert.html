@@ -1,0 +1,37 @@
+<ion-header class="toolbar_header">
+  <ion-navbar>
+    <ion-title>Alerts</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <p *ngIf = "!alertExist" color="black">There are no alerts..</p>
+  <ion-card class="alert-card" *ngFor = "let alert of notifications">
+    <ion-item class="">
+      <ion-avatar class="ionAvatar" item-start>
+        <img src="https://res.cloudinary.com/anheart/image/upload/v{{
+          alert.senderId.picVersion
+        }}/{{ alert.senderId.picId }}">
+      </ion-avatar>
+     <!-- <p  *ngIf = "alertExist">{{message}}</p>  -->
+      
+      <p *ngIf = "alertExist"text-wrap class="msg">{{alert.message}}</p>
+      <!-- <p class="postTime">12/12/2020</p> -->
+      <ion-row>
+        <ion-col col>
+          <button ion-button icon-left clear (click)="markAlert(alert)">
+            
+            <ion-icon name="checkmark" *ngIf = "!alert.read" class="read"></ion-icon>
+            <ion-icon name="done-all" *ngIf = "alert.read" class="read" ></ion-icon>
+          </button>
+          <button ion-button icon-left clear (click) ="deleteAlert(alert)">
+            <!-- <ion-icon name="done-all" class="read" ></ion-icon> -->
+            <ion-icon name="trash" class="read"></ion-icon>
+          </button>
+        </ion-col>
+      </ion-row>
+
+    </ion-item>
+  </ion-card>
+</ion-content>
